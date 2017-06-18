@@ -38,7 +38,7 @@ git clone https://github.com/docker-library/golang.git
 patch -p0 < golang.patch
 
 if [ "$ALPINE" = "1" ]; then
-    if [[ "$(docker images -q alpine 2> /dev/null)" == "" ]]; then
+    if [[ "$(docker images -q whw3/alpine 2> /dev/null)" == "" ]]; then
         if [[ ! -d /srv/docker/alpine ]]; then
             cd /srv/docker/
             git@git:Docker/alpine.git
