@@ -41,7 +41,7 @@ if [ "$ALPINE" = "1" ]; then
     if [[ "$(docker images -q whw3/alpine 2> /dev/null)" == "" ]]; then
         if [[ ! -d /srv/docker/alpine ]]; then
             cd /srv/docker/
-            git@git:Docker/alpine.git
+            git clone https://github.com/whw3/alpine.git
         fi
         cd /srv/docker/alpine
         /srv/docker/alpine/build.sh
