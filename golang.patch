@@ -11,7 +11,7 @@
 @@ -1,7 +1,7 @@
 -FROM buildpack-deps:jessie-scm
 -
-+FROM resin/rpt-raspian
++FROM resin/rpi-raspian
 +RUN apt-get update && apt-get upgrade && apt-get install -y wget
  # gcc for cgo
 -RUN apt-get update && apt-get install -y --no-install-recommends \
