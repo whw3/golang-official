@@ -52,7 +52,7 @@ else
     cd /srv/docker/golang-official/golang/1.8/
 fi
 
-grep GOLANG_VERSION Dockerfile| sed -e 's/ENV/export/;s/$/"/;s/VERSION /VERSION="/' > /srv/docker/golang-official/GOLANG_VERSION
+grep GOLANG_VERSION Dockerfile| grep ENV| sed -e 's/ENV/export/;s/$/"/;s/VERSION /VERSION="/' > /srv/docker/golang-official/GOLANG_VERSION
 source /srv/docker/golang-official/GOLANG_VERSION
 RELEASE=$(echo $GOLANG_VERSION | sed 's/\.[0-9]\+$//')
 cat << EOF > options 
