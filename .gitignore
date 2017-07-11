@@ -1,2 +1,4 @@
 *~
+options
+GOLANG_VERSION
 golang/*
