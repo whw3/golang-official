@@ -37,14 +37,6 @@ cd /srv/docker/golang-official
 git clone https://github.com/docker-library/golang.git
 patch -p0 < golang.patch
 
-grep GOLANG_VERSION /srv/docker/golang-official/golang/1.8/Dockerfile| sed -e 's/ENV/export/;s/$/"/;s/VERSION /VERSION="/' > GOLANG_VERSION
-source GOLANG_VERSION
-RELEASE=$(echo GOLANG_VERSION | sed 's/\.[0-9]\+$//')
-cat << EOF > options 
-export RELEASE="v$RELEASE"
-export TAGS=(golang:$RELEASE golang:latest)
-EOF
-
 if [ "$ALPINE" = "1" ]; then
     if [[ "$(docker images -q whw3/alpine 2> /dev/null)" == "" ]]; then
         if [[ ! -d /srv/docker/alpine ]]; then
@@ -59,4 +51,13 @@ if [ "$ALPINE" = "1" ]; then
 else
     cd /srv/docker/golang-official/golang/1.8/
 fi
+
+grep GOLANG_VERSION Dockerfile| sed -e 's/ENV/export/;s/$/"/;s/VERSION /VERSION="/' > /srv/docker/golang-official/GOLANG_VERSION
+source /srv/docker/golang-official/GOLANG_VERSION
+RELEASE=$(echo $GOLANG_VERSION | sed 's/\.[0-9]\+$//')
+cat << EOF > options 
+export RELEASE="v$RELEASE"
+export TAGS=(golang:$RELEASE golang:latest)
+EOF
+
 docker build -t golang .
